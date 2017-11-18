@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import ListBooks from './ListBooks'
+import Search from './SearchPage'
 
 class BooksApp extends Component {
   state = {
@@ -21,20 +23,33 @@ class BooksApp extends Component {
   }
   updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then((data) => {
-      // console.log("data", data)
-      // console.log("books", this.state.books)
       this.setState(state => ({
           books: this.state.books.filter((b) => book.id !== b.id).concat([{...book,shelf}])
       }))
     })
   }
+  addBook = (book) => {
+    this.setState(state => ({
+      books: this.state.books.concat(book)
+    }))
+  }
   render() {
     return (
       <div className="app">
+      <Route exact path="/" render={() => (
         <ListBooks
-          books={this.state.books}
-          onUpdateBook={(book, shelf) => this.updateBook(book, shelf)}
+        books={this.state.books}
+        onUpdateBook={(book, shelf) => this.updateBook(book, shelf)}
         />
+      )}/>
+        <Route path="/search" render={() => (
+          <Search
+            books={this.state.books}
+            onAddBook={(book, shelf) => {
+              this.addBook(book)
+            }}
+          />
+        )}/>
       </div>
     )
   }
