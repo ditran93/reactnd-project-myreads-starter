@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
 
 class MainPage extends Component {
-  handleChangeBookShelf = (book, shelf) => {this.props.onChangeBookShelf(book, shelf)}
+  
   render() {
     console.log(this.props.books)
     return (
@@ -27,7 +27,7 @@ class MainPage extends Component {
                 bookShelfTitle="Read" 
                 books={this.props.books} 
                 shelf="read"
-                onHandleShelf={this.onHandleShelf}/>
+                onHandleShelf={this.props.onHandleShelf}/>
               </div>
             </div>
             <Link 

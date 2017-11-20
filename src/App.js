@@ -43,7 +43,7 @@ class BooksApp extends Component {
       <Route exact path="/" render={() => (
         <MainPage
         books={this.state.books}
-        onChangeBookShelf={this.changeBookShelf}
+        onHandleShelf={this.changeBookShelf}
         />
       )}/>
         <Route path="/search" render={() => (
