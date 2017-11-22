@@ -1,17 +1,33 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Book extends Component {
-
-  debugger;
+  static propTypes = {
+    onHandleShelf: PropTypes.func.isRequired
+  }
+  constructor(props) {
+    super(props)
+    this.state = {
+      shelf: "none"
+    }
+  }
+  onChangeShelf = (value) => {
+    this.props.onHandleShelf(this.props.book, value)
+    this.setState({shelf: value})
+    }
+  
+  componentDidMount() {
+    this.setState({shelf: this.props.shelf})
+  }
   render() {
-    const { shelf, title, thumbnail, authors } = this.props
+    const { title, thumbnail, authors } = this.props
     return (
       <div>
         <div className="book">
           <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail})`}}></div>
             <div className="book-shelf-changer">
-              <select value={shelf} onChange={(e) => this.props.onHandleShelf(this.props.book, e.target.value)}>
+              <select value={this.state.shelf} onChange={(e) => this.onChangeShelf(e.target.value)}>
                 <option value="none" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
@@ -26,6 +42,5 @@ class Book extends Component {
       </div>
     );
   }
-   
 };
 export default Book

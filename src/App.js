@@ -32,11 +32,7 @@ class BooksApp extends Component {
       }))
     })
   }
-  addBook = (book) => {
-    this.setState(state => ({
-      books: this.state.books.concat(book)
-    }))
-  }
+
   render() {
     return (
       <div className="app">
@@ -49,9 +45,7 @@ class BooksApp extends Component {
         <Route path="/search" render={() => (
           <Search
             books={this.state.books}
-            onAddBook={(book, shelf) => {
-              this.addBook(book)
-            }}
+            onHandleShelf={this.changeBookShelf}
           />
         )}/>
       </div>

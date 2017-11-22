@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
+import PropTypes from 'prop-types'
 
 class MainPage extends Component {
-  
+  static propTypes = {
+    books: PropTypes.array.isRequired,
+    onHandleShelf: PropTypes.func.isRequired
+  }
   render() {
+    const { books, onHandleShelf } = this.props
     console.log(this.props.books)
     return (
           <div className="list-books">
@@ -15,19 +20,19 @@ class MainPage extends Component {
               <div>
                 <BookShelf 
                 bookShelfTitle="Currently Reading" 
-                books={this.props.books} 
+                books={books} 
                 shelf="currentlyReading" 
-                onHandleShelf={this.props.onHandleShelf}/>
+                onHandleShelf={onHandleShelf}/>
                 <BookShelf 
                 bookShelfTitle="Want to Read" 
-                books={this.props.books} 
+                books={books} 
                 shelf="wantToRead"
-                onHandleShelf={this.props.onHandleShelf}/>
+                onHandleShelf={onHandleShelf}/>
                 <BookShelf 
                 bookShelfTitle="Read" 
-                books={this.props.books} 
+                books={books} 
                 shelf="read"
-                onHandleShelf={this.props.onHandleShelf}/>
+                onHandleShelf={onHandleShelf}/>
               </div>
             </div>
             <Link 
