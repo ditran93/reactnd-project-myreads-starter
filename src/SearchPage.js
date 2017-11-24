@@ -33,7 +33,6 @@ class Search extends Component {
                 this.setState(state => ({
                     results: data
                 }))
-                console.log("results", this.state.results)
             })
         }
     

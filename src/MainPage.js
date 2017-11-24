@@ -10,7 +10,6 @@ class MainPage extends Component {
   }
   render() {
     const { books, onHandleShelf } = this.props
-    console.log(this.props.books)
     return (
           <div className="list-books">
             <div className="list-books-title">
